@@ -1,2 +1,2 @@
 # mosaicwm
-Mosaic - A Wayland compositor.
+Mosaic - A scrollable-tiling Wayland compositor.
