@@ -67,7 +67,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // register socket into loop 
     handle.insert_source(
         socket,
-        move |client_stream, _, state| {
+        move |client_stream, _, _state| {
             let _ = display_handle.insert_client(
                 client_stream,
                 Arc::new(ClientState {
