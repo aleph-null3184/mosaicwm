@@ -5,6 +5,10 @@ use smithay::{
             CompositorHandler,
             CompositorClientState, 
         },
+
+        shell::{
+            xdg::XdgShellState,
+        }
     },
 
     reexports::{
@@ -25,6 +29,7 @@ use crate::wayland::surface::Surface;
 pub struct Mosaic {
     pub running: bool,
     pub compositor_state: CompositorState,
+    pub xdg_shell_state: XdgShellState,
 
     pub surfaces: HashMap<WlSurface, Surface>,
     pub needs_repaint: bool,

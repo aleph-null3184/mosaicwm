@@ -1,7 +1,7 @@
 mod state; 
 mod wayland;
 
-#[allow(unused)]
+use crate::wayland::xdg_shell::*;
 use smithay::{
     reexports::{
         calloop::EventLoop,
@@ -21,7 +21,8 @@ use smithay::{
             CompositorState,
             CompositorHandler,
             CompositorClientState,
-        }, 
+        },
+        shell::xdg::XdgShellState,
     },
 };
 use smithay::delegate_compositor;
@@ -47,6 +48,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let compositor_state = CompositorState::new::<Mosaic>(&display_handle);
 
+    let xdg_shell_state =
+        XdgShellState::new::<Mosaic>(&display_handle);
     // this is the state. the state is the brain of the compositor.
     // essentially, what this is is everything the compositor knows
     // now, as in, what windows have been opened in the current moment,
@@ -55,6 +58,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut state = Mosaic {
         running: true,
         compositor_state,
+        xdg_shell_state,
         
         surfaces: HashMap::new(),
         needs_repaint: false,
